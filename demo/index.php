@@ -1,83 +1,78 @@
-<!DOCTYPE html>
+<?php
+$name = "Dark Matter";
+$read = false;
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>demo</title>
-    <style>
-      body {
-        display: grid;
-        place-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: sans-serif;
+if ($read) {
+  $message = "You have read $name";
+} else {
+  $message = "You haven't read $name";
+}
+
+
+$books = [
+  [
+    "Do Androids dream of electric sheep",
+    "Philip K. Dick",
+    "http://example.com"
+  ],
+  [
+    "Hail Mary",
+    "Andy Weir",
+    "http://example.com"
+  ]
+];
+
+  $associativeBooks = [
+  [
+    "title" => "Do Androids dream of electric sheep",
+    "author" => "Philip K. Dick",
+    "release_year" => 1968,
+    "purchaseUrl" => "http://example.com"
+  ],
+  [
+    "title" => "Hail Mary",
+    "author" => "Andy Weir",
+    "release_year" => 2021,
+    "purchaseUrl" => "http://example.com" 
+  ],
+    [
+    "title" => "The Martian",
+    "author" => "Andy Weir",
+    "release_year" => 2011,
+    "purchaseUrl" => "http://example.com" 
+  ]
+];
+
+function filter($items, $fn) {
+
+  $filteredItems = [];
+
+  foreach ($items as $item) {
+    if ($fn($item)) {
+      $filteredItems[] = $item;
       }
-    </style>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
-  </head>
-  <body>
-      <?php
-        $name = "Dark Matter";
-        $read = false;
+  }
+  return $filteredItems;
+};
 
-        if ($read) {
-          $message = "You have read $name";
-        } else {
-          $message = "You haven't read $name";
-        }
+$filteredByAuthor = function ($books, $author) {
+  $filteredBooks = [];
 
+  foreach ($books as $book) {
+    if ($book['author'] === $author) {
+      $filteredBooks[] = $book;
+      }
+  }
+  return $filteredBooks;
+};
 
-        $books = [
-          [
-            "Do Androids dream of electric sheep",
-            "Philip K. Dick",
-            "http://example.com"
-          ],
-          [
-            "Hail Mary",
-            "Andy Weir",
-            "http://example.com"
-          ]
-        ];
+// $filteredBooks = filter($associativeBooks, function ($book) {
+//   return $book['release_year'] >= 2000;
+// });
 
-          $associativeBooks = [
-          [
-            "title" => "Do Androids dream of electric sheep",
-            "author" => "Philip K. Dick",
-            "purchaseUrl" => "http://example.com"
-          ],
-          [
-            "title" => "Hail Mary",
-            "author" => "Andy Weir",
-            "purchaseUrl" => "http://example.com"
-          ]
-        ];
-      ?>
-    <h1>
-      <?= $message?>
-    </h1>
+$filteredBooks = array_filter($associativeBooks, function($book) {
+  return $book['release_year'] < 2000;
+});
 
-    <h1>Recommended Books </h1>
-    <ul>
-      <?php foreach ($books as $book) {echo "<li>$book[0]</li>";} ?>
-    </ul>
-     <ul>
-      <?php foreach ($books as $book) : ?>
-        <li><?= $book[0] ?> </li>
-      <?php endforeach; ?>
-    </ul>
-    <p><?= $books[1][0]?></p>
-     <ul>
-      <?php foreach ($associativeBooks as $book) : ?>
-        <li>
-          <a href="<?= $book['purchaseUrl']?>" >
-            <?= $book['title']?>
-          </a>
-        </li>
-      <?php endforeach; ?>
-    </ul>
-  </body>
-</html>
+require "index.view.php";
+
