@@ -1,18 +1,15 @@
-<?php
+<?php 
 require "functions.php";
 
-$heading = 'Home';
-
-// dd($_SERVER);
-
-echo $_SERVER['REQUEST_URI'];
+require 'router.php';
 
 
-// if ($_SERVER['REQUEST_URI'] === '/') { 
-//     echo 'bg-gray-900 text-white';
-// } else { 
-//     echo 'text-gray-300';
+// if ($uri === '/') {
+//     require 'controllers/index.php';
+// } else if ($uri === '/about') {
+//     require 'controllers/about.php';
+// } else {
+//     require 'controllers/contact.php';
 // }
 
 
-require "views/index.view.php";
