@@ -12,7 +12,10 @@ require "Database.php";
 //     require 'controllers/contact.php';
 // }
 
-$db = new Database();
+
+$config = require('config.php');
+
+$db = new Database($config['database']);
 // When we receive several items, we do fetchAll and we fetch it as an associative array
 $posts = $db->query("select * from posts;")->fetchAll(PDO::FETCH_ASSOC);
 

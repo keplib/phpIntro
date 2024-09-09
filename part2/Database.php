@@ -45,16 +45,50 @@
 
 
 
+// class Database {
+
+//     public $connection;
+
+//     // this will be called when a new istance of the class is created
+//     public function __construct()
+//     {
+//         $dsn ="mysql:host=127.0.0.1;port=3306;dbname=myapp;user=root;password=yourpassword;charset=utf8mb4";
+
+//         $this->connection = new PDO($dsn, 'root');
+
+//     }
+
+//     public function query($query) {
+        
+//         $statement = $this->connection->prepare($query);
+//         $statement->execute();
+
+//         return $statement;
+//     }
+// }
+
+// Second iteration, to get rid off hard coded values
+
 class Database {
 
     public $connection;
 
     // this will be called when a new istance of the class is created
-    public function __construct()
+    public function __construct($config, $username = 'root', $password = 'yourpassword')
     {
-        $dsn ="mysql:host=127.0.0.1;port=3306;dbname=myapp;user=root;password=yourpassword;charset=utf8mb4";
+    
+        // http_build_query($config) => host=localhost&port=3306&dbname=myapp&charset=utf8mb4
+        // in order to change the separator, we can pass down a string for the separator as the 3rd value
 
-        $this->connection = new PDO($dsn, 'root');
+        //http($config, '', ';') => host=localhost;port=3306;dbname=myapp;charset=utf8mb4
+
+        // $dsn ="mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};charset={$config['charset']}";
+
+        $dsn = 'mysql:' . http_build_query($config, '', ';');
+
+        $this->connection = new PDO($dsn, $username, $password, [
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
 
     }
 
