@@ -1,6 +1,6 @@
 <?php 
 require "functions.php";
-
+require "Database.php";
 // require 'router.php';
 
 
@@ -12,45 +12,12 @@ require "functions.php";
 //     require 'controllers/contact.php';
 // }
 
+$db = new Database();
+// When we receive several items, we do fetchAll and we fetch it as an associative array
+$posts = $db->query("select * from posts;")->fetchAll(PDO::FETCH_ASSOC);
 
-// connect to our MySQL database. PDO PHP data objects
+// but when we only have one item returned we can do -> fetch()
 
-// First, create a new PDO class, dsn is the connection link
-$dsn ="mysql:host=127.0.0.1;port=3306;dbname=myapp;user=root;password=yourpassword;charset=utf8mb4";
-$pdo = new PDO($dsn, 'root');
-
-// we create a statement that is essentially an SQL query
-$statement = $pdo->prepare("select * from posts");
-// we execute it
-$statement->execute();
-// and we fetch the results as associative arrays
-$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-// we can just console log it
-// dd($posts);
-
-
-// or we can fetch it as HTML list items 
 foreach ($posts as $post) {
     echo "<li>" . $post['title'] . "</li>";
 }
-
-
-
-// INTRO TO OBJECTS
-
-// class Person {
-//     public $name;
-//     public $age;
-
-//     public function breathe() {
-//         echo $this->name . ' is breathing';
-//     }
-// }
-
-
-// $person = new Person();
-
-// $person->name = 'John Doe';
-// $person->age= 25;
-// $person->breathe();
