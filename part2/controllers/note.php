@@ -9,4 +9,4 @@ $heading = 'Note';
 $posts = $db->query('select * from notes where id=:id', ['id' => $_GET['id']] )->fetchAll();
 
 
-require "views/notes.view.php";
+require "views/note.view.php";
