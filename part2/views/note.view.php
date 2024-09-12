@@ -5,12 +5,11 @@
 
         <main>
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <a href="/notes" class="text-blue-500 hover:underline">Go back</a>
-            <?php foreach ($posts as $post) : ?>
-                <li>
-                    <?= $post['body'] ?>
-                </li>
-            <?php endforeach; ?> 
+                <p class="mb-6">
+                    <a href="/notes" class="text-blue-500 hover:underline">Go back</a>
+                </p>
+            
+            <p class="mb-12"><?= $post['body'] ?></p>
            
             </div>
         </main>
