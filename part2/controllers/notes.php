@@ -8,7 +8,9 @@ $db = new Database($config['database']);
 $query = "select * from notes where user_id = 1";
 
 // When we receive several items, we do fetchAll and we fetch it as an associative array
-$posts = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
+// $posts = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
+$posts = $db->query($query)->get();
+
 
 // dd($posts);
 
