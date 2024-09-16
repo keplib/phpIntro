@@ -69,6 +69,10 @@
 
 // Second iteration, to get rid off hard coded values
 
+namespace Core;
+
+use PDO;
+
 class Database {
 
     public $connection;
