@@ -1,10 +1,10 @@
 <?php
 
-$heading = 'Home';
+//$heading = 'Home';
 
 // dd($_SERVER);
 
-echo $_SERVER['REQUEST_URI'];
+//echo $_SERVER['REQUEST_URI'];
 
 
 // if ($_SERVER['REQUEST_URI'] === '/') { 
@@ -14,4 +14,6 @@ echo $_SERVER['REQUEST_URI'];
 // }
 
 
-require "views/index.view.php";
+view("index.view.php", [
+    'heading' => 'Home'
+]);

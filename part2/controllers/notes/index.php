@@ -1,8 +1,8 @@
 <?php
 
-$heading = 'My Notes';
+//$heading = 'My Notes';
 
-$config = require('config.php');
+$config = require base_path('config.php');
 
 $db = new Database($config['database']);
 $query = "select * from notes where user_id = 1";
@@ -16,4 +16,9 @@ $posts = $db->query($query)->get();
 
 
 
-require "views/notes/index.view.php";
+//require "/notes/index.view.php";
+
+view('notes/index.view.php', [
+    'heading' => 'My Notes',
+    'posts'  => $posts
+]);

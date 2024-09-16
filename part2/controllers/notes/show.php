@@ -1,8 +1,8 @@
 <?php
 
-$config = require('config.php');
+$config = require base_path('config.php');
 $db = new Database($config['database']);
-$heading = 'Note';
+//$heading = 'Note';
 $currentUserId = 1;
 
 // When we receive several items, we do fetchAll and we fetch it as an associative array
@@ -11,4 +11,10 @@ $post = $db->query('select * from notes where id=:id', ['id' => $_GET['id']] )->
 
 authorize($post['user_id'] === $currentUserId);
 
-require "views/notes/show.view.php";
+//require "views/notes/show.view.php";
+
+view('notes/show.view.php', [
+    'heading' => 'Note',
+    'post' => $post,
+    //'currentUserId' => $currentUserId
+]);
